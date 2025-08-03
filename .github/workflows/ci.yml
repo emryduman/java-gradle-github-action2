@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest]
     
     steps:
     - uses: actions/checkout@v2
@@ -30,3 +30,24 @@ jobs:
 
     - name: Build with Gradle
       run: ./gradlew build
+
+    - name: Build and Push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v4
+      with:
+       image: emryduman/emry-repo-01   # Change this to your Docker Hub repo name
+       registry: docker.io
+       username: ${{ secrets.DOCKER_USERNAME }}       # Set this secret in your repo settings
+       password: ${{ secrets.DOCKER_PASSWORD }}       # Set this secret in your repo settings
+       tags: latest,${{ github.sha }}                 # Push 'latest' and commit SHA tags
+
+#    - name: Log in to Docker Hub
+#      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+#    - name: Build Docker Image
+#      run: docker build -t your-dockerhub-username/your-app-name:latest .
+
+#    - name: Push Docker Image
+#      run: docker push your-dockerhub-username/your-app-name:latest
+
+
+      
