@@ -40,6 +40,8 @@ jobs:
 
   docker-image:
     runs-on: ubuntu-latest
+    needs: build-java  # ✅ Ensures this job runs AFTER "build-java"
+
     
     steps:
 #    - name: Build and Push Docker Image
