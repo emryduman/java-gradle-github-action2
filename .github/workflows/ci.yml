@@ -38,12 +38,6 @@ jobs:
     - name: Clean and Build with Gradle
       run: ./gradlew clean build
 
-    - name: Upload JAR as artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: built-jar
-        path: build/libs/my-app-1.0-SNAPSHOT.jar
-
     - name: Upload JAR Artifact with 1-day Retention
       uses: actions/upload-artifact@v4
       with:
