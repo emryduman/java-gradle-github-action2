@@ -17,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Clone the project code
     - uses: actions/checkout@v2
 
     - name: Set up JDK 1.8
